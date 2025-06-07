@@ -1,9 +1,11 @@
+
 from flask import Flask, request, send_file, render_template
 import yt_dlp
 import os
 import uuid
+import traceback  # ← added this
 
-app = Flask(__name__)
+app = Flask(_name_)
 
 DOWNLOAD_FOLDER = "downloads"
 os.makedirs(DOWNLOAD_FOLDER, exist_ok=True)
@@ -24,7 +26,7 @@ def download():
     video_id = str(uuid.uuid4())
     output_path = os.path.join(DOWNLOAD_FOLDER, f"{video_id}.%(ext)s")
 
-    # Safe yt_dlp options
+    # yt_dlp options
     if format_type == "mp3":
         ydl_opts = {
             'format': 'bestaudio/best',
@@ -46,7 +48,7 @@ def download():
             'merge_output_format': 'mp4',
             'postprocessors': [{
                 'key': 'FFmpegVideoConvertor',
-                'preferredformat': 'mp4',  # FIXED TYPO here
+                'preferredformat': 'mp4',
             }],
             'quiet': True,
             'noplaylist': True,
@@ -60,12 +62,11 @@ def download():
 
         file_path = os.path.join(DOWNLOAD_FOLDER, f"{video_id}.{final_ext}")
 
-        # Return the file as a download
         return send_file(file_path, as_attachment=True)
 
     except Exception as e:
+        traceback.print_exc()  # ← this will print full error to logs
         return f"Download failed: {str(e)}", 500
 
-
-if __name__ == "__main__":
+if _name_ == "_main_":
     app.run(debug=True, host="0.0.0.0", port=5000)
