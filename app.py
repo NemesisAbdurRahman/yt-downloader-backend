@@ -5,7 +5,7 @@ import os
 import uuid
 import traceback  # ← added this
 
-app = Flask(_name_)
+app = Flask(__name__)
 
 DOWNLOAD_FOLDER = "downloads"
 os.makedirs(DOWNLOAD_FOLDER, exist_ok=True)
@@ -68,5 +68,5 @@ def download():
         traceback.print_exc()  # ← this will print full error to logs
         return f"Download failed: {str(e)}", 500
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)
