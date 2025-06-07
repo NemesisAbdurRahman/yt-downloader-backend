@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>YouTube Video Downloader</title>
+  <style>
+    body {
+      background-color: #0f172a;
+      color: #f8fafc;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+    h1 {
+      color: #38bdf8;
+      margin-bottom: 30px;
+    }
+    form {
+      background-color: #1e293b;
+      padding: 30px;
+      border-radius: 10px;
+      display: inline-block;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+    input[type="text"] {
+      width: 300px;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+    select {
+      width: 320px;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      border: none;
+      font-size: 16px;
+    }
+    button {
+      background-color: #38bdf8;
+      color: #0f172a;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #0ea5e9;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎬 YouTube Downloader</h1>
+  <form method="POST" action="/download">
+    <input type="text" name="url" placeholder="Enter YouTube video URL" required><br>
+    
+    <select name="format" required>
+      <option value="mp4">🎥 MP4 (Video)</option>
+      <option value="mp3">🎵 MP3 (Audio)</option>
+    </select><br>
+
+    <button type="submit">Download</button>
+  </form>
+</body>
+</html>
