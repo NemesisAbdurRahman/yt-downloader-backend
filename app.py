@@ -46,7 +46,7 @@ def download():
             'merge_output_format': 'mp4',
             'postprocessors': [{
                 'key': 'FFmpegVideoConvertor',
-                'preferedformat': 'mp4',
+                'preferredformat': 'mp4',  # FIXED TYPO here
             }],
             'quiet': True,
             'noplaylist': True,
@@ -59,13 +59,13 @@ def download():
             ydl.download([url])
 
         file_path = os.path.join(DOWNLOAD_FOLDER, f"{video_id}.{final_ext}")
-        
-        # Return the file to user without saving permanently
+
+        # Return the file as a download
         return send_file(file_path, as_attachment=True)
 
     except Exception as e:
         return f"Download failed: {str(e)}", 500
 
-if __name__ == "__main__":
-    app.run(debug=True)
 
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0", port=5000)
